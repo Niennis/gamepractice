@@ -2,7 +2,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d'); // c meaning context
 
 canvas.width = 1024;
-canvas.height = 570;
+canvas.height = 576;
 
 // c.fillStyle = 'white';
 // c.fillRect(0, 0, canvas.width, canvas.height)
@@ -50,7 +50,6 @@ battleZonesMap.forEach((row, i) => {
       )
   })
 })
-console.log(battleZones);
 
 const image = new Image();
 image.src = './assets/PokeGameMap.png';
@@ -77,7 +76,8 @@ const player = new Sprite({
   },
   image: playerDownImg,
   frames: {
-    max: 4
+    max: 4,
+    hold: 15
   },
   sprites: {
     up: playerUpImg,
@@ -159,7 +159,7 @@ const animate = () => {
 
   // movimiento y reconocimiento de los límites
   let moving = true;
-  player.moving = false;
+  player.animate = false;
 
   if (battle.initiated) return
   // activate a battle
@@ -209,7 +209,7 @@ const animate = () => {
 
 
   if (keys.w.pressed && lastKey === 'w') {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.up;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
@@ -237,7 +237,7 @@ const animate = () => {
 
 
   } else if (keys.a.pressed && lastKey === 'a') {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.left;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
@@ -262,7 +262,7 @@ const animate = () => {
         movable.position.x += 3
       })
   } else if (keys.s.pressed && lastKey === 's') {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.down;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
@@ -287,7 +287,7 @@ const animate = () => {
         movable.position.y -= 3
       })
   } else if (keys.d.pressed && lastKey === 'd') {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.right;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
@@ -314,8 +314,10 @@ const animate = () => {
   }
 
 }
+// IMPORTANTE: comentado por mientras para animar las batallas, después se descomenta
 animate();
 
+// Battle animation
 const battleBackgroundImage = new Image();
 battleBackgroundImage.src = './assets/img/battleBackground.png';
 const battleBackground = new Sprite({
@@ -326,11 +328,28 @@ const battleBackground = new Sprite({
   image: battleBackgroundImage
 })
 
+const draggleImg = new Image();
+draggleImg.src = './assets/img/draggleSprite.png'
+const draggle = new Sprite({
+  position: {
+    x: 800,
+    y: 100
+  },
+  image:draggleImg,
+  frames: {
+    max: 4,
+    hold: 30
+  },
+  animate: true
+})
+
 const animateBattle = () => {
   window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
+  draggle.draw()
 }
 
+// animateBattle()
 
 // ---- Keys pressed or not
 let lastKey = '';
