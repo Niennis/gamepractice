@@ -1,14 +1,33 @@
+* {
+  font-family: 'Press Start 2P', cursive;
+}
+
 body {
   background-color: black;
 }
 
-#root{
+h1 {
+  margin: 0;
+  font-size: 16px;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+#root {
   display: inline-block;
   position: relative;
 }
 
-#overlappingDiv{
-  background-color: black; 
+#overlappingDiv {
+  background-color: black;
   position: absolute;
   top: 0;
   right: 0;
@@ -16,4 +35,74 @@ body {
   left: 0;
   opacity: 0;
   pointer-events: none;
+}
+
+#battleBar {
+  background-color: white;
+  position: absolute;
+  height: 140px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 4px solid black;
+  display: flex;
+}
+
+#battleBar div:first-child {
+  width: 66.66%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#battleBar div:nth-child(2n) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33.33%;
+  border-left: 4px solid black;
+}
+
+#monsterDiv {
+  background-color: white;
+  width: 250px;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  border: 4px solid black;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.monsterName {
+  font-size: 16px;
+}
+
+#monsterLifeBar, #ownMonsterLifeBar{
+  position: relative;
+}
+
+.monsterLifeBar {
+  height: 5px;
+  background-color: #ccc;
+  margin-top: 10px;
+}
+
+.monsterGreenBar {
+  height: 5px;
+  background-color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#ownMonsterDiv {
+  background-color: white;
+  width: 250px;
+  position: absolute;
+  top: 320px;
+  right: 50px;
+  border: 4px solid black;
+  border-radius: 10px;
+  padding: 12px;
 }

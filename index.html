@@ -1,10 +1,51 @@
-<link rel="stylesheet" href="src/style.css">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Press+Start+2P&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+
 <div id="root">
   <div id="overlappingDiv"></div>
+
+  <div id="monsterDiv">
+    <h2 class="monsterName">Draggle</h2>
+    <div id="monsterLifeBar">
+      <div class="monsterLifeBar"></div>
+      <div class="monsterGreenBar" id="enemyHealthBar"></div>
+    </div>
+  </div>
+
+  <div id="ownMonsterDiv">
+    <h2 class="monsterName">Emby</h2>
+    <div id="ownMonsterLifeBar">
+      <div class="monsterLifeBar"></div>
+      <div class="monsterGreenBar" id="playerHealthBar"></div>
+    </div>
+  </div>
+
   <canvas></canvas>
+
+  <div id="battleBar">
+    <div>
+      <button>Tackle</button>
+      <button>Fireball</button>
+      <button> - </button>
+      <button> - </button>
+    </div>
+    <div>
+      <h1>Attack type</h1>
+    </div>
+  </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js" integrity="sha512-GQ5/eIhs41UXpG6fGo4xQBpwSEj9RrBvMuKyE2h/2vw3a9x85T1Bt0JglOUVJJLeyIUl/S/kCdDXlE/n7zCjIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"
+  integrity="sha512-GQ5/eIhs41UXpG6fGo4xQBpwSEj9RrBvMuKyE2h/2vw3a9x85T1Bt0JglOUVJJLeyIUl/S/kCdDXlE/n7zCjIg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="data/battlezones.js"></script>
 <script src="data/collisions.js"></script>
+<script src="data/attacks.js"></script>
 <script src="src/classes.js"></script>
 <script src="src/index.js"></script>

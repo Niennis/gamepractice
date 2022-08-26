@@ -315,7 +315,7 @@ const animate = () => {
 
 }
 // IMPORTANTE: comentado por mientras para animar las batallas, después se descomenta
-animate();
+// animate();
 
 // Battle animation
 const battleBackgroundImage = new Image();
@@ -335,7 +335,23 @@ const draggle = new Sprite({
     x: 800,
     y: 100
   },
-  image:draggleImg,
+  image: draggleImg,
+  frames: {
+    max: 4,
+    hold: 30
+  },
+  animate: true,
+  isEnemy: true
+})
+
+const embyImg = new Image();
+embyImg.src = './assets/img/embySprite.png'
+const emby = new Sprite({
+  position: {
+    x: 280,
+    y: 325
+  },
+  image: embyImg,
   frames: {
     max: 4,
     hold: 30
@@ -343,13 +359,32 @@ const draggle = new Sprite({
   animate: true
 })
 
+const renderedSprites = [];
 const animateBattle = () => {
   window.requestAnimationFrame(animateBattle)
   battleBackground.draw()
   draggle.draw()
+  emby.draw()
+
+  renderedSprites.forEach(sprite => {
+    sprite.draw()
+  })
 }
 
-// animateBattle()
+animateBattle()
+
+// event listeners for attack buttons
+document.querySelectorAll('button').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const selectedAttack = attacks[e.currentTarget.innerHTML]
+    emby.attack({
+      attack: selectedAttack,
+      recipient: draggle,
+      renderedSprites
+    })
+  })
+})
+
 
 // ---- Keys pressed or not
 let lastKey = '';
