@@ -5,7 +5,6 @@ class Sprite {
     frames = { max: 1, hold: 15 },
     sprites,
     animate = false,
-    isEnemy = false,
     rotation = 0
   }) {
     this.position = position
@@ -19,8 +18,6 @@ class Sprite {
     this.animate = animate
     this.sprites = sprites
     this.opacity = 1
-    this.health = 100
-    this.isEnemy = isEnemy
     this.rotation = rotation
   }
 
@@ -61,7 +58,47 @@ class Sprite {
     }
   }
 
+}
+
+class Monster extends Sprite {
+  constructor({  position,
+    image,
+    frames = { max: 1, hold: 15 },
+    sprites,
+    animate = false,
+    rotation = 0,
+    isEnemy = false, 
+    name,
+    attacks
+  }) {
+    super({
+      position,
+      image,
+      frames,
+      sprites,
+      animate,
+      rotation
+    })
+    this.health = 100
+    this.isEnemy = isEnemy
+    this.name = name
+    this.attacks = attacks
+  }
+
+  faint() {
+    console.log('faint')
+    document.querySelector('#dialoguesDiv').innerHTML = `${this.name} fainted`;
+    gsap.to(this.position, {
+      y: this.position.y + 20
+    })
+    gsap.to(this, {
+      opacity: 0
+    })
+  }
+  
   attack({ attack, recipient, renderedSprites }) {
+    document.querySelector('#dialoguesDiv').style.display = 'block';
+    document.querySelector('#dialoguesDiv').innerHTML = `${this.name} used ${attack.name}`;
 
     let healthBar = '#enemyHealthBar';
     if (this.isEnemy) healthBar = '#playerHealthBar'
@@ -69,7 +106,7 @@ class Sprite {
     let rotation = 1
     if (this.isEnemy) rotation = -2.2
 
-    this.health -= attack.damage
+    recipient.health -= attack.damage
 
     switch (attack.name) {
       case 'Fireball':
@@ -96,7 +133,7 @@ class Sprite {
           onComplete: () => {
             // enemy actually gets hit
             gsap.to(healthBar, {
-              width: this.health + '%'
+              width: recipient.health + '%'
             })
 
             gsap.to(recipient.position, {
@@ -132,7 +169,7 @@ class Sprite {
           onComplete: () => {
             // enemy actually gets hit
             gsap.to(healthBar, {
-              width: this.health + '%'
+              width: recipient.health + '%'
             })
 
             gsap.to(recipient.position, {
@@ -154,8 +191,6 @@ class Sprite {
         })
         break;
     }
-
-
   }
 }
 
