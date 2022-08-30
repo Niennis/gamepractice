@@ -60,6 +60,7 @@ const initBattle = () => {
               })
               
               battle.initiated = false;
+              audio.Map.play()
             }
           })
         })
@@ -92,6 +93,7 @@ const initBattle = () => {
                 })
 
                 battle.initiated = false;
+                audio.Map.play();
               }
             })
           })
